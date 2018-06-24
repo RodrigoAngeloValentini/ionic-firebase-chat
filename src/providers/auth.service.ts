@@ -2,10 +2,12 @@ import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 
 import { AngularFireAuth, FirebaseAuthState } from 'angularfire2';
+import { BaseService } from './base.service';
 
 @Injectable()
-export class AuthService {
+export class AuthService extends BaseService {
   constructor(public auth: AngularFireAuth, public http: Http) {
+    super();
     console.log('Hello AuthProvider Provider');
   }
 
@@ -13,6 +15,6 @@ export class AuthService {
     email: string;
     password: string;
   }): firebase.Promise<FirebaseAuthState> {
-    return this.auth.createUser(user);
+    return this.auth.createUser(user).catch(this.handlePromiseError);
   }
 }
