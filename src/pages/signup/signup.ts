@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {
-  IonicPage,
   NavController,
   NavParams,
   Loading,
@@ -13,8 +12,8 @@ import 'rxjs/add/operator/first';
 
 import { AuthService } from './../../providers/auth.service';
 import { UserService } from './../../providers/user.service';
+import { HomePage } from '../home/home';
 
-@IonicPage()
 @Component({
   selector: 'page-signup',
   templateUrl: 'signup.html',
@@ -70,6 +69,7 @@ export class SignupPage {
                 .create(formUser)
                 .then(() => {
                   console.log('Usuário cadastrado com sucesso!');
+                  this.navCtrl.setRoot(HomePage);
                   loading.dismiss();
                 })
                 .catch((error: any) => {
