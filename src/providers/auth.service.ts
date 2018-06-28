@@ -4,7 +4,6 @@ import 'rxjs/add/operator/first';
 
 import { AngularFireAuth, FirebaseAuthState } from 'angularfire2';
 import { BaseService } from './base.service';
-import { PromiseObservable } from 'rxjs/observable/PromiseObservable';
 
 @Injectable()
 export class AuthService extends BaseService {
