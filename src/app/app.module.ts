@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { HttpModule } from '@angular/http';
 
 import { MyApp } from './app.component';
+import { ChatPage } from '../pages/chat/chat';
 import { HomePage } from '../pages/home/home';
 import { SignupPage } from './../pages/signup/signup';
 import { SigninPage } from './../pages/signin/signin';
@@ -20,6 +21,7 @@ import { UserService } from '../providers/user.service';
 import { AuthService } from '../providers/auth.service';
 import { CustomLoggedHeaderComponent } from '../components/custom-logged-header/custom-logged-header.component';
 import { CapitalizePipe } from '../pipes/capitalize.pipe';
+import { ChatService } from '../providers/chat.service';
 
 const firebaseAppConfig: FirebaseAppConfig = {
   apiKey: 'AIzaSyBXJqMfEckh1Q_OFVD5wpZzGGtq8699cNc',
@@ -37,6 +39,7 @@ const firebaseAuthConfig = {
 @NgModule({
   declarations: [
     CapitalizePipe,
+    ChatPage,
     CustomLoggedHeaderComponent,
     MyApp,
     HomePage,
@@ -50,13 +53,14 @@ const firebaseAuthConfig = {
     AngularFireModule.initializeApp(firebaseAppConfig, firebaseAuthConfig),
   ],
   bootstrap: [IonicApp],
-  entryComponents: [MyApp, HomePage, SignupPage, SigninPage],
+  entryComponents: [ChatPage, MyApp, HomePage, SignupPage, SigninPage],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     AuthService,
     UserService,
+    ChatService,
   ],
 })
 export class AppModule {}

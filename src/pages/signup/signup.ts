@@ -63,10 +63,10 @@ export class SignupPage {
             })
             .then((authState: FirebaseAuthState) => {
               delete formUser.password;
-              formUser.uid = authState.auth.uid;
+              let uuid: string = authState.auth.uid;
 
               this.userService
-                .create(formUser)
+                .create(formUser, uuid)
                 .then(() => {
                   console.log('Usuário cadastrado com sucesso!');
                   this.navCtrl.setRoot(HomePage);
