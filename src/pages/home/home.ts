@@ -19,6 +19,7 @@ import firebase from 'firebase';
   templateUrl: 'home.html',
 })
 export class HomePage {
+  chats: FirebaseListObservable<Chat[]>;
   users: FirebaseListObservable<User[]>;
   view: string = 'chats';
 
@@ -35,6 +36,7 @@ export class HomePage {
 
   ionViewDidLoad() {
     this.users = this.userService.users;
+    this.chats = this.chatService.chats;
   }
 
   onChatCreate(recipientUser: User): void {
@@ -66,6 +68,19 @@ export class HomePage {
     this.navCtrl.push(ChatPage, {
       recipientUser: recipientUser,
     });
+  }
+
+  onChatOpen(chat: Chat): void {
+    let recipientUserId: string = chat.$key;
+
+    this.userService
+      .get(recipientUserId)
+      .first()
+      .subscribe((user: User) => {
+        this.navCtrl.push(ChatPage, {
+          recipientUser: user,
+        });
+      });
   }
 
   onSignup(): void {
