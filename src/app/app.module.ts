@@ -26,6 +26,7 @@ import { MessageService } from '../providers/message.service';
 
 import { MessageBoxComponent } from '../components/message-box/message-box.component';
 import { CustomLoggedHeaderComponent } from '../components/custom-logged-header/custom-logged-header.component';
+import { UserInfoComponent } from '../components/user-info/user-info.component';
 
 const firebaseAppConfig: FirebaseAppConfig = {
   apiKey: 'AIzaSyBXJqMfEckh1Q_OFVD5wpZzGGtq8699cNc',
@@ -46,6 +47,7 @@ const firebaseAuthConfig = {
     ChatPage,
     CustomLoggedHeaderComponent,
     MessageBoxComponent,
+    UserInfoComponent,
     MyApp,
     HomePage,
     SignupPage,

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, NavParams, Content } from 'ionic-angular';
 
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 
@@ -19,6 +19,7 @@ import firebase from 'firebase';
   templateUrl: 'chat.html',
 })
 export class ChatPage {
+  @ViewChild(Content) content: Content;
   messages: FirebaseListObservable<Message[]>;
   pageTitle: string;
   sender: User;
@@ -55,6 +56,12 @@ export class ChatPage {
         this.sender.$key,
       );
 
+      let doSubscription = () => {
+        this.messages.subscribe((messages: Message[]) => {
+          this.scrollToBottom();
+        });
+      };
+
       this.messages = this.messageService.getMessages(
         this.sender.$key,
         this.recipient.$key,
@@ -66,6 +73,10 @@ export class ChatPage {
             this.recipient.$key,
             this.sender.$key,
           );
+
+          doSubscription();
+        } else {
+          doSubscription();
         }
       });
     });
@@ -91,5 +102,13 @@ export class ChatPage {
           });
         });
     }
+  }
+
+  private scrollToBottom(duration?: number): void {
+    setTimeout(() => {
+      if (this.content) {
+        this.content.scrollToBottom(duration || 300);
+      }
+    }, 50);
   }
 }

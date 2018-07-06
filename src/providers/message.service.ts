@@ -25,6 +25,7 @@ export class MessageService extends BaseService {
       .list(`/messages/${userId1}-${userId2}`, {
         query: {
           orderByChild: 'timestamp',
+          limitToLast: 30,
         },
       })
       .catch(this.handleObservableError);
