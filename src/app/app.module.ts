@@ -10,6 +10,7 @@ import { ChatPage } from '../pages/chat/chat';
 import { HomePage } from '../pages/home/home';
 import { SignupPage } from './../pages/signup/signup';
 import { SigninPage } from './../pages/signin/signin';
+import { UserProfilePage } from '../pages/user-profile/user-profile';
 
 import {
   AngularFireModule,
@@ -27,6 +28,7 @@ import { MessageService } from '../providers/message.service';
 import { MessageBoxComponent } from '../components/message-box/message-box.component';
 import { CustomLoggedHeaderComponent } from '../components/custom-logged-header/custom-logged-header.component';
 import { UserInfoComponent } from '../components/user-info/user-info.component';
+import { UserMenuComponent } from '../components/user-menu/user-menu.component';
 
 const firebaseAppConfig: FirebaseAppConfig = {
   apiKey: 'AIzaSyBXJqMfEckh1Q_OFVD5wpZzGGtq8699cNc',
@@ -47,11 +49,13 @@ const firebaseAuthConfig = {
     ChatPage,
     CustomLoggedHeaderComponent,
     MessageBoxComponent,
+    UserMenuComponent,
     UserInfoComponent,
     MyApp,
     HomePage,
     SignupPage,
     SigninPage,
+    UserProfilePage,
   ],
   imports: [
     BrowserModule,
@@ -60,7 +64,14 @@ const firebaseAuthConfig = {
     AngularFireModule.initializeApp(firebaseAppConfig, firebaseAuthConfig),
   ],
   bootstrap: [IonicApp],
-  entryComponents: [ChatPage, MyApp, HomePage, SignupPage, SigninPage],
+  entryComponents: [
+    ChatPage,
+    MyApp,
+    HomePage,
+    SignupPage,
+    SigninPage,
+    UserProfilePage,
+  ],
   providers: [
     StatusBar,
     SplashScreen,

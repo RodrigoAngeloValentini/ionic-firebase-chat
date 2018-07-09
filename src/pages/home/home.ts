@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, MenuController } from 'ionic-angular';
 import { FirebaseListObservable } from 'angularfire2';
 
 import { ChatPage } from '../chat/chat';
@@ -25,6 +25,7 @@ export class HomePage {
 
   constructor(
     public navCtrl: NavController,
+    public menuCtrl: MenuController,
     public userService: UserService,
     public authService: AuthService,
     public chatService: ChatService,
@@ -37,6 +38,7 @@ export class HomePage {
   ionViewDidLoad() {
     this.users = this.userService.users;
     this.chats = this.chatService.chats;
+    this.menuCtrl.enable(true, 'user-menu');
   }
 
   filterItems(event: any): void {
