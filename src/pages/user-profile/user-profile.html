@@ -21,6 +21,15 @@
       <ion-input type="text" placeholder="Username" [(ngModel)]="currentUser.username" required minlenght="3" name="username"></ion-input>
     </ion-item>
 
+    <ion-item>
+      <ion-icon name="image" item-left></ion-icon>
+      <input type="file" (change)="onPhoto($event)">
+    </ion-item>
+
+    <progress-bar *ngIf="uploadProgress" [progress]="uploadProgress"></progress-bar>
+
+    <br />
+
     <button ion-button block type=" submit" [disabled]="profileForm.form.invalid">Save</button>
   </form>
 </ion-content>

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
@@ -8,6 +8,7 @@ import {
   FirebaseListObservable,
   FirebaseObjectObservable,
   FirebaseAuthState,
+  FirebaseApp,
 } from 'angularfire2';
 
 import { User } from './../models/user.model';
@@ -18,7 +19,11 @@ export class UserService extends BaseService {
   users: FirebaseListObservable<User[]>;
   currentUser: FirebaseObjectObservable<User>;
 
-  constructor(public af: AngularFire, public http: Http) {
+  constructor(
+    public af: AngularFire,
+    @Inject(FirebaseApp) public fireabaseApp: any,
+    public http: Http,
+  ) {
     super();
     this.listenAuthState();
   }
@@ -81,5 +86,13 @@ export class UserService extends BaseService {
         .object(`/users/${userId}`)
         .catch(this.handleObservableError)
     );
+  }
+
+  uploadPhoto(file: File, userId: string): firebase.storage.UploadTask {
+    return this.fireabaseApp
+      .storage()
+      .ref()
+      .child(`/users/${userId}`)
+      .put(file);
   }
 }

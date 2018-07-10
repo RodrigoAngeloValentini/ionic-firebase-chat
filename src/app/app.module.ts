@@ -29,6 +29,7 @@ import { MessageBoxComponent } from '../components/message-box/message-box.compo
 import { CustomLoggedHeaderComponent } from '../components/custom-logged-header/custom-logged-header.component';
 import { UserInfoComponent } from '../components/user-info/user-info.component';
 import { UserMenuComponent } from '../components/user-menu/user-menu.component';
+import { ProgressBarComponent } from '../components/progress-bar/progress-bar.component';
 
 const firebaseAppConfig: FirebaseAppConfig = {
   apiKey: 'AIzaSyBXJqMfEckh1Q_OFVD5wpZzGGtq8699cNc',
@@ -51,6 +52,7 @@ const firebaseAuthConfig = {
     MessageBoxComponent,
     UserMenuComponent,
     UserInfoComponent,
+    ProgressBarComponent,
     MyApp,
     HomePage,
     SignupPage,

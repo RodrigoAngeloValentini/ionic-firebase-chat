@@ -12,6 +12,8 @@ import { User } from '../../models/user.model';
 export class UserProfilePage {
   currentUser: User;
   canEdit: boolean = false;
+  uploadProgress: number;
+  private filePhoto: File;
 
   constructor(
     public authService: AuthService,
@@ -32,7 +34,34 @@ export class UserProfilePage {
 
   onSubmit(event: Event): void {
     event.preventDefault();
-    this.editUser();
+
+    if (this.filePhoto) {
+      let uploadTask = this.userService.uploadPhoto(
+        this.filePhoto,
+        this.currentUser.$key,
+      );
+
+      uploadTask.on(
+        'state_changed',
+        snapshot => {
+          this.uploadProgress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
+          );
+        },
+        (error: Error) => {
+          // catch error
+        },
+        () => {
+          this.editUser(uploadTask.snapshot.downloadURL);
+        },
+      );
+    } else {
+      this.editUser();
+    }
+  }
+
+  onPhoto(event): void {
+    this.filePhoto = event.target.files[0];
   }
 
   private editUser(photoUrl?: string): void {
@@ -44,6 +73,7 @@ export class UserProfilePage {
       })
       .then(() => {
         this.canEdit = false;
+        this.uploadProgress = 0;
       });
   }
 }

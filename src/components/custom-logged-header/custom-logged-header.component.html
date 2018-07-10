@@ -4,7 +4,16 @@
     <ion-icon name="menu"></ion-icon>
   </button>
 
-  <ion-title>
+  <ion-title *ngIf="user">
+    <ion-item detail-none no-lines color="transparent">
+      <ion-avatar item-left>
+        <img [src]="user.photo || 'assets/imgs/no-photo.jpg'">
+      </ion-avatar>
+      {{ title }}
+    </ion-item>
+  </ion-title>
+
+  <ion-title *ngIf="!user">
     {{ title }}
   </ion-title>
 
