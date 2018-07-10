@@ -23,7 +23,7 @@
 
     <ion-item>
       <ion-icon name="image" item-left></ion-icon>
-      <input type="file" (change)="onPhoto($event)">
+      <input type="file" (change)="onPhoto($event)" accept="image/*">
     </ion-item>
 
     <progress-bar *ngIf="uploadProgress" [progress]="uploadProgress"></progress-bar>
